@@ -1,4 +1,5 @@
 # main.py
+
 from algorithm import Algorithm
 
 def write_result(file, i, result):

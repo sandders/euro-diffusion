@@ -1,4 +1,5 @@
-# city.py
+# utility_classes.py
+
 from settings import INITIAL_COIN_COUNT, REPRESENTATIVE_PORTION
 
 class City:
