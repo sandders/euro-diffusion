@@ -69,11 +69,13 @@ class Algorithm:
     def is_completed(self):
         return all(map(lambda country: country.is_completed(), self.country_list))
     
-    def check_max_value(self, country_name, value, coord):
+    @staticmethod
+    def check_max_value(country_name, value, coord):
         if not 1 <= value <= MAX_XY_VALUE:
             raise Exception(f'In {country_name}: value {value} is not in range 1 ≤ {coord} ≤ {MAX_XY_VALUE}')
 
-    def check_range(self, country_name, value_l, value_h, coord_l, coord_h):
+    @staticmethod
+    def check_range(country_name, value_l, value_h, coord_l, coord_h):
         if value_l > value_h:
             raise Exception(f'In {country_name}: value {coord_l}:{value_l} > {coord_h}:{value_h}')
 
@@ -85,13 +87,13 @@ class Algorithm:
 
         xl, yl, xh, yh = map(int, coordinates)
 
-        self.check_max_value(name, xl, 'xl')
-        self.check_max_value(name, yl, 'yl')
-        self.check_max_value(name, xh, 'xh')
-        self.check_max_value(name, yh, 'yh')
+        Algorithm.check_max_value(name, xl, 'xl')
+        Algorithm.check_max_value(name, yl, 'yl')
+        Algorithm.check_max_value(name, xh, 'xh')
+        Algorithm.check_max_value(name, yh, 'yh')
 
-        self.check_range(name, xl, xh, 'xl', 'xh')
-        self.check_range(name, yl, yh, 'yl', 'yh')
+        Algorithm.check_range(name, xl, xh, 'xl', 'xh')
+        Algorithm.check_range(name, yl, yh, 'yl', 'yh')
 
         self.country_list.append(Country(name, xl - 1, yl - 1, xh - 1, yh - 1))
 
