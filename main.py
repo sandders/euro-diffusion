@@ -22,7 +22,11 @@ def parse_cases(filename):
             lines = []
 
             for i in range(country_count):
-                lines.append(file.readline())
+                line = file.readline().strip()
+                if not line:
+                    print(f'Error: Missing data for country {i+1} in case {len(cases)+1}')
+                    return None
+                lines.append(line)
 
             cases.append(lines)
 
