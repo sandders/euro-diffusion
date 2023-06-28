@@ -36,29 +36,35 @@ class Algorithm:
 
             country_index += 1
 
-    def add_neighbors(self, area):
-        w = len(area)
-        h = len(area[0])
+    def get_neighbors(self, area, x, y):
+        width = len(area)
+        height = len(area[0])
+        neighbors = []
 
-        for x in range(w):
-            for y in range(h):
+        if x + 1 <= width - 1 and area[x + 1][y]:
+            neighbors.append(area[x + 1][y])
+
+        if x - 1 >= 0 and area[x - 1][y]:
+            neighbors.append(area[x - 1][y])
+
+        if y + 1 <= height - 1 and area[x][y + 1]:
+            neighbors.append(area[x][y + 1])
+
+        if y - 1 >= 0 and area[x][y - 1]:
+            neighbors.append(area[x][y - 1])
+
+        return neighbors
+
+    def add_neighbors(self, area):
+        width = len(area)
+        height = len(area[0])
+
+        for x in range(width):
+            for y in range(height):
                 city = area[x][y]
 
                 if city:
-                    neighbors = []
-
-                    if x + 1 <= w - 1 and area[x + 1][y]:
-                        neighbors.append(area[x + 1][y])
-
-                    if x - 1 >= 0 and area[x - 1][y]:
-                        neighbors.append(area[x - 1][y])
-
-                    if y + 1 <= h - 1 and area[x][y + 1]:
-                        neighbors.append(area[x][y + 1])
-
-                    if y - 1 >= 0 and area[x][y - 1]:
-                        neighbors.append(area[x][y - 1])
-
+                    neighbors = self.get_neighbors(area, x, y)
                     city.set_neighbors(neighbors)
 
     def init_algorithm(self):
