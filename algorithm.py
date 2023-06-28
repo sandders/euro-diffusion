@@ -1,7 +1,7 @@
 # algorithm.py
 
 from utility_classes import City, Country
-from settings import MAX_XY_VALUE
+from settings import MAX_XY_VALUE, MAX_NAME_LENGTH
 class Algorithm:
     def __init__(self):
         self.country_list = []
@@ -82,7 +82,7 @@ class Algorithm:
     def add_country(self, string):
         name, *coordinates = string.split()
 
-        if len(name) > 25:
+        if len(name) > MAX_NAME_LENGTH:
             raise Exception('Name has more than 25 characters')
 
         xl, yl, xh, yh = map(int, coordinates)
