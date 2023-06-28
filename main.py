@@ -35,9 +35,6 @@ def parse_cases(filename):
         return cases
 
 
-
-    
-
 if __name__ == '__main__':
     cases = parse_cases('input.txt')
     if cases:

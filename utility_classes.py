@@ -3,10 +3,11 @@
 from settings import INITIAL_COIN_COUNT, REPRESENTATIVE_PORTION
 
 class City:
-    def __init__(self, country_count, country_index):
+    def __init__(self, country_count, country_index, country_name):
         self.__completed = False
         self.__country_count = country_count
-        self.__neighbors = None
+        self.neighbors = None
+        self.country_name = country_name
 
         self.__coins = [0] * country_count
         self.__cache = [0] * country_count
@@ -26,14 +27,14 @@ class City:
             if coin_count >= REPRESENTATIVE_PORTION:
                 share = coin_count // REPRESENTATIVE_PORTION
 
-                for neighbor_city in self.__neighbors:
+                for neighbor_city in self.neighbors:
                     neighbor_city.__cache[i] += share
                     self.__coins[i] -= share
 
     # Getters and Setters
 
     def set_neighbors(self, neighbors):
-        self.__neighbors = neighbors
+        self.neighbors = neighbors
 
     def get_coins(self):
         return self.__coins
@@ -65,3 +66,10 @@ class Country:
 
     def is_completed(self):
         return all(city.is_completed() for city in self.cities)
+    
+    def is_island(self):
+        for city in self.cities:
+            for neighbor in city.neighbors:
+                if neighbor.country_name != self.name:
+                    return False
+        return True

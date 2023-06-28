@@ -29,7 +29,7 @@ class Algorithm:
                     x = country.lower_left_x + i
                     y = country.lower_left_y + j
 
-                    city = City(country_count, country_index)
+                    city = City(country_count, country_index, country.name)
 
                     area[x][y] = city
                     country.add_city(city)
@@ -103,9 +103,15 @@ class Algorithm:
 
         self.country_list.append(Country(name, xl - 1, yl - 1, xh - 1, yh - 1))
 
+    def check_islands(self):
+        if len(self.country_list) != 1:
+            for country in self.country_list:
+                if country.is_island():
+                    raise Exception(f'Country {country.name} is an island')
+
     def run(self):
         self.init_algorithm()
-
+        self.check_islands()
         result = {}
         days = 0
 
